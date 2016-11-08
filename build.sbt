@@ -14,10 +14,10 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-slick" % "2.0.0",
   "com.typesafe.play" %% "play-slick-evolutions" % "2.0.0",
   "com.h2database" % "h2" % "1.4.192",
+  "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.0" % "test",
   specs2 % Test
 )
-libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1201-jdbc41"
 resolvers += "Sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
 
 fork in run := true
