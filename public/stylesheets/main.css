@@ -1,0 +1,16 @@
+body {
+    background: #fefefe url("../images/wood.jpg") repeat;
+    background-size: auto;
+}
+
+.alert {
+    opacity: 0.8;
+}
+
+.alert h1, h2, h3 {
+    opacity: 1;
+}
+
+#chart svg {
+    height: 400px;
+}

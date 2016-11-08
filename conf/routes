@@ -1,11 +1,4 @@
-
-
-
-GET           /                          controllers.TemperatureApp.showTemperatures
-PUT           /projects/:name            controllers.Application.createProject(name: String)
-GET           /projects/list             controllers.Application.listProjects
-GET           /projects/:id              controllers.Application.projects(id: Long)
-PUT           /projects/:id/:name        controllers.Application.addTaskToProject(name: String, id: Long)
-PATCH         /tasks/:id                 controllers.Application.modifyTask(id: Long, color:Option[String] ?= None)
-
-DELETE        /projects/:name            controllers.Application.delete(name: String)
+GET        /assets/*file            controllers.Assets.at(path="/public", file)
+GET        /                        controllers.TemperatureApp.showTemperatureNow()
+GET        /time                    controllers.TemperatureApp.showTemperaturesOverTime()
+GET        /add/:temperature        controllers.TemperatureApp.add(temperature: Float)

@@ -1,0 +1,61 @@
+@(temperatures: List[Temperature])
+
+@main("Temperaturer over tid") {
+    <script>
+            var chart;
+    </script>
+    <div class="container">
+        <div class="page-header text-center">
+            <h1>Hallager Brygghus</h1>
+        </div>
+        <div id="temperature-text" class="alert alert-success">
+        @if(temperatures.nonEmpty) {
+            <h3 class="text-center">Temperatur nå: <strong>@temperatures.last.temperatureString° C</strong></h3>
+            <h5 class="text-center">Målt klokken @temperatures.last.timeString</h5>
+        } else {
+            <h3>Ingen målinger</h3>
+        }
+
+        </div>
+        <div class="jumbotron">
+            <div id="chart"></div>
+        </div>
+
+    </div>
+    <script>
+            nv.addGraph(function () {
+                chart = nv.models.lineChart()
+                        .options({
+                            useInteractiveGuideline: false
+                        });
+
+                chart.xAxis     //Chart x-axis settings
+                        .tickFormat(function (d) {
+                            return d3.time.format('%d/%m %H:%M')(new Date(d));
+                        })
+                        .staggerLabels(false);
+
+                chart.yAxis     //Chart y-axis settings
+                        .axisLabel('Temperatur')
+                        .tickFormat(d3.format('.02f'));
+                var values = [];
+                @for(temp <- temperatures) {
+                values.push({x: @temp.timestamp.getTime, y: @temp.temperature});
+                }
+                var data = [{
+                    values: values,
+                    key: 'Temperatur',
+                    color: '#ff7f0e'
+                }];
+
+                d3.select('#chart').append('svg')
+                        .datum(data)
+                        .transition().duration(500)
+                        .call(chart);
+
+                nv.utils.windowResize(chart.update);
+                return chart;
+            });
+
+    </script>
+}

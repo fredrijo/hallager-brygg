@@ -1,0 +1,30 @@
+@(last: Temperature)
+
+@main("Temperatur nå") {
+    <script>$(document).ready(function () {
+        var temp = 16.5;
+        @if(last != null) {
+        temp = @last.temperature;
+        }
+        drawGauge(temp);
+    })</script>
+    <div class="container">
+        <div class="page-header text-center">
+            <h1>Hallager Brygghus</h1>
+        </div>
+        <div id="temperature-text" class="alert alert-success">
+            @if(last != null) {
+                <h3 class="text-center">Temperatur nå: <strong>@last.temperatureString° C</strong></h3>
+                <h5 class="text-center">Målt klokken @last.timeString</h5>
+            } else {
+                <h3>Ingen målinger</h3>
+            }
+            <div id="gauge" class="chart-gauge"></div>
+        </div>
+        <div class="jumbotron">
+            <p>Temperaturen er cirka nøyaktig, men bør kalibreres mot et analogt termometer.</p>
+            <p>Målingen oppdateres hvert 5. minutt</p>
+            <p><a href="@routes.TemperatureApp.showTemperaturesOverTime()">Se temperatur-utvikling over tid</a></p>
+        </div>
+    </div>
+}

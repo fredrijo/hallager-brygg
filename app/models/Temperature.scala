@@ -1,6 +1,7 @@
 package models
 
 import java.sql.Timestamp
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import javax.inject.Inject
 
@@ -9,7 +10,13 @@ import slick.driver.JdbcProfile
 
 import scala.concurrent.Future
 
-case class Temperature(id: Long, timestamp: Timestamp, temperature: Float)
+case class Temperature(id: Long, timestamp: Timestamp, temperature: Float) {
+
+  def temperatureString = f"$temperature%2.1f"
+
+  def timeString = new SimpleDateFormat("HH:mm").format(timestamp)
+
+}
 
 class TemperatureRepo @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) {
 
@@ -24,6 +31,8 @@ class TemperatureRepo @Inject()(protected val dbConfigProvider: DatabaseConfigPr
 
   def all: Future[List[Temperature]] =
     db.run(Temperatures.to[List].result)
+
+  def last: Future[Temperature] = db.run(Temperatures.sortBy(_.timestamp.desc).take(1).result.head)
 
   def add(temp: Float): Future[Long] = {
     val temperature = Temperature(0, java.sql.Timestamp.valueOf(LocalDateTime.now()), temp)

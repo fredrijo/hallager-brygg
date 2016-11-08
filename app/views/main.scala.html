@@ -4,6 +4,11 @@
 <html>
     <head>
         <title>@title</title>
+            <!-- JQUERY -->
+        <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
             <!-- BOOTSTRAP -->
             <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -11,10 +16,16 @@
             <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <!-- D3 -->
+        <script src="http://d3js.org/d3.v2.js" charset="utf-8"></script>
+
+        <script src="@routes.Assets.at("javascripts/nv.d3.min.js")"></script>
+        <script src="@routes.Assets.at("javascripts/temperature.js")"></script>
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/nv.d3.min.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/gauge.css")">
     </head>
     <body>
-        <div>
-        @content
-        </div>
+    @content
     </body>
 </html>
