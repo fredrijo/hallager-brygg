@@ -1,4 +1,4 @@
-name := """play-slick-example"""
+name := """hallagerbrygg"""
 
 version := "1.0-SNAPSHOT"
 
