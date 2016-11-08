@@ -15,6 +15,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-slick-evolutions" % "2.0.0",
   "com.h2database" % "h2" % "1.4.192",
   "org.postgresql" % "postgresql" % "9.4-1201-jdbc41",
+  "com.heroku.sdk" % "heroku-jdbc" % "0.1.0",
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.0" % "test",
   specs2 % Test
 )
