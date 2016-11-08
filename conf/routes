@@ -1,3 +1,4 @@
+GET        /favicon.ico             controllers.Assets.at(path="/public", file="beer.ico")
 GET        /assets/*file            controllers.Assets.at(path="/public", file)
 GET        /                        controllers.TemperatureApp.showTemperatureNow()
 GET        /time                    controllers.TemperatureApp.showTemperaturesOverTime()
