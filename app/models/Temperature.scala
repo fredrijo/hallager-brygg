@@ -45,7 +45,7 @@ class TemperatureRepo @Inject()(protected val dbConfigProvider: DatabaseConfigPr
 
     def timestamp = column[Timestamp]("TIMESTAMP")
 
-    def temperature = column[Float]("temperature")
+    def temperature = column[Float]("TEMPERATURE")
 
     def * = (id, timestamp, temperature) <> (Temperature.tupled, Temperature.unapply)
 
