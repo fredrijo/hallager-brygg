@@ -11,23 +11,13 @@ import scala.concurrent.Future
 
 class TemperatureApp @Inject()(temperatureRepo: TemperatureRepo)
   extends Controller {
-  def showTemperatureNow() = Action.async { implicit rs =>
-    temperatureRepo.last
-      .map(last => Ok(views.html.temperature(last)))
+  def index() = Action.async { implicit rs =>
+    temperatureRepo.all
+      .map(temperatures => Ok(views.html.temperature(temperatures.last, temperatures)))
   }
 
   def add(temperature: Float) = Action.async { implicit rs =>
     temperatureRepo.add(temperature)
-    Future(Redirect(routes.TemperatureApp.showTemperatureNow()))
-  }
-
-  private def toJson(temperatures: List[Temperature]): JsArray =
-    JsArray(temperatures.map(t =>
-      JsObject(Seq("x" -> JsNumber(t.timestamp.getTime),
-        "y" -> JsNumber(BigDecimal(t.temperature.toString))))))
-
-  def showTemperaturesOverTime() = Action.async { implicit rs =>
-    temperatureRepo.all
-      .map(temps => Ok(views.html.timechart(temps)))
+    Future(Redirect(routes.TemperatureApp.index()))
   }
 }

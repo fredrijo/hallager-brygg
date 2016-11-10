@@ -1,4 +1,4 @@
-@(last: Temperature)
+@(last: Temperature, temperatures: List[Temperature])
 
 @main("Temperatur nå") {
     <script>$(document).ready(function () {
@@ -7,6 +7,11 @@
         temp = @last.temperature;
         }
         drawGauge(temp);
+        var values = [];
+        @for(temp <- temperatures) {
+        values.push({x: @temp.timestamp.getTime, y: @temp.temperature});
+        }
+        createTimeLine(values, 18, 20);
     })</script>
     <div class="container">
         <div class="page-header text-center">
@@ -22,9 +27,7 @@
             <div id="gauge" class="chart-gauge"></div>
         </div>
         <div class="jumbotron">
-            <p>Temperaturen er cirka nøyaktig, men bør kalibreres mot et analogt termometer.</p>
-            <p>Målingen oppdateres hvert 5. minutt</p>
-            <p><a href="@routes.TemperatureApp.showTemperaturesOverTime()">Se temperatur-utvikling over tid</a></p>
+            <div id="chart"></div>
         </div>
     </div>
 }

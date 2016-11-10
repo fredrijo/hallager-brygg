@@ -125,3 +125,51 @@ function drawGauge(temp) {
     needle.animateOn(chart, percent);
 
 }
+
+function createTimeLine(values, minTemp, maxTemp) {
+    nv.addGraph(function () {
+        chart = nv.models.lineChart()
+            .options({
+                useInteractiveGuideline: false
+            });
+
+        chart.xAxis     //Chart x-axis settings
+            .tickFormat(function (d) {
+                return d3.time.format('%d/%m %H:%M')(new Date(d));
+            })
+            .staggerLabels(false);
+
+        chart.yAxis     //Chart y-axis settings
+            .axisLabel('Temperatur')
+            .tickFormat(d3.format('.02f'));
+        var maxLine = [];
+        var minLine = [];
+        for (var i = 0; i < values; i++) {
+            maxLine.push({x: values[i].x, y: maxTemp});
+            minLine.push({x: values[i].x, y: minTemp});
+        }
+
+        var data = [{
+            values: values,
+            key: 'Temperatur',
+            color: '#984b43'
+        }, {
+            values: maxLine,
+            key: 'max',
+            color: '#eac67a'
+        }, {
+            values: minLine,
+            key: 'min',
+            color: '#eac67a'
+        }];
+
+        d3.select('#chart').append('svg')
+            .datum(data)
+            .transition().duration(500)
+            .call(chart);
+
+        nv.utils.windowResize(chart.update);
+        return chart;
+    });
+
+}
