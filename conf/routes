@@ -1,4 +1,4 @@
-GET        /favicon.ico             controllers.Assets.at(path="/public/images", file="favicon.ico")
 GET        /assets/*file            controllers.Assets.at(path="/public", file)
+GET        /favicon.ico             controllers.Assets.at(path="/public", `file`="images/favicon.ico")
 GET        /                        controllers.TemperatureApp.index()
 GET        /add/:temperature        controllers.TemperatureApp.add(temperature: Float)
