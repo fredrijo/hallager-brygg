@@ -34,6 +34,11 @@ class TemperatureRepo @Inject()(protected val dbConfigProvider: DatabaseConfigPr
   def all: Future[List[Temperature]] =
     db.run(Temperatures.to[List].result)
 
+  def lastDays(days: Int): Future[List[Temperature]] =
+    db.run(Temperatures
+      .filter(_.timestamp > java.sql.Timestamp.valueOf(LocalDateTime.now().minusDays(days)))
+      .to[List].result)
+
   def last: Future[Temperature] = db.run(Temperatures.sortBy(_.timestamp.desc).take(1).result.head)
 
   def add(temp: Float): Future[Long] = {

@@ -9,7 +9,7 @@ import play.api.mvc.{Action, Controller}
 class TemperatureApp @Inject()(temperatureRepo: TemperatureRepo)
   extends Controller {
   def index() = Action.async { implicit rs =>
-    temperatureRepo.all
+    temperatureRepo.lastDays(14)
       .map(temperatures => Ok(views.html.temperature(temperatures.last, temperatures)))
   }
 
