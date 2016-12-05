@@ -16,6 +16,8 @@ case class Temperature(id: Long, timestamp: Timestamp, temperature: Float) {
 
   def timeString = new SimpleDateFormat("HH:mm").format(timestamp)
 
+  def dateString = new SimpleDateFormat("dd/MM-YYYY").format(timestamp)
+
 }
 
 class TemperatureRepo @Inject()(protected val dbConfigProvider: DatabaseConfigProvider) {
