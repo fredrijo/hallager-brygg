@@ -1,7 +1,7 @@
 @(last: Temperature, temperatures: List[Temperature])
 
 @main("Temperatur nå") {
-    <script>$(document).ready(function () {
+<script>$(document).ready(function () {
         var temp = 16.5;
         @if(last != null) {
         temp = @last.temperature;
@@ -12,22 +12,23 @@
         values.push({x: @temp.timestamp.getTime, y: @temp.temperature});
         }
         createTimeLine(values, 18, 20);
-    })</script>
-    <div class="container">
-        <div class="page-header text-center">
-            <h1>Hallager Brygghus</h1>
-        </div>
-        <div id="temperature-text" class="alert alert-success">
-            @if(last != null) {
-                <h3 class="text-center">Temperatur nå: <strong>@last.temperatureString° C</strong></h3>
-                <h5 class="text-center">Målt klokken @last.timeString @last.dateString</h5>
-            } else {
-                <h3>Ingen målinger</h3>
-            }
-            <div id="gauge" class="chart-gauge"></div>
-        </div>
-        <div class="jumbotron">
-            <div id="chart"></div>
-        </div>
+    })
+</script>
+<div class="container">
+    <div class="page-header text-center">
+        <h1>Hallager Brygghus</h1>
     </div>
+    <div id="temperature-text" class="alert alert-success">
+        @if(last != null) {
+        <h3 class="text-center">Temperatur nå: <strong>@last.temperatureString° C</strong></h3>
+        <h5 class="text-center">Målt klokken @last.timeString @last.dateString</h5>
+        } else {
+        <h3>Ingen målinger</h3>
+        }
+        <div id="gauge" class="chart-gauge"></div>
+    </div>
+    <div class="jumbotron">
+        <div id="chart"></div>
+    </div>
+</div>
 }
